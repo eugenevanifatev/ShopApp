@@ -25,7 +25,7 @@ namespace ShopApp.BLL.Services
         {
             try
             {
-                Db.Users.Any(m=>)
+                //Db.Users.Any(m=>)
             }
             catch (Exception ex)
             {

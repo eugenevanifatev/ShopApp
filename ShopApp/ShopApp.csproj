@@ -60,6 +60,20 @@
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ShopApp.BLL\ShopApp.BLL.csproj">
+      <Project>{20e75299-63c5-483a-9f03-20a80d9be9e5}</Project>
+      <Name>ShopApp.BLL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ShopApp.DAL\ShopApp.DAL.csproj">
+      <Project>{581b07fa-b719-479b-9a92-db3579e2466b}</Project>
+      <Name>ShopApp.DAL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ShopApp.Models\ShopApp.Models.csproj">
+      <Project>{a69b7e3c-0ee8-490d-9033-0ebe083d9847}</Project>
+      <Name>ShopApp.Models</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
