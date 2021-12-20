@@ -9,7 +9,8 @@ namespace ShopApp.BLL.Intefaces
 {
     public interface IUserService
     {
-        void RegisterUser(AccountVM accountVM);
-        void LogIn(AccountVM accountVM);
+        bool RegisterUser(AccountVM accountVM);
+        bool LogIn(AccountVM accountVM);
+        bool RegisterAdmin(AccountVM accountVM);
     }
 }

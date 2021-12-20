@@ -4,9 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ShopApp.BLL
+namespace ShopApp.BLL.ViewModels.CategoryVM
 {
-    public class Class1
+    public class CategoryVM
     {
+        public string Name { get; set; }
     }
 }
