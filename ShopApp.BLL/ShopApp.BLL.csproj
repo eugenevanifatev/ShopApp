@@ -52,15 +52,21 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Infrastructure\CurrentAccount.cs" />
+    <Compile Include="Infrastructure\ShopBasket.cs" />
     <Compile Include="Intefaces\ICategoryService.cs" />
     <Compile Include="Intefaces\IOrderService.cs" />
     <Compile Include="Intefaces\IProductService.cs" />
+    <Compile Include="Intefaces\IShopBasketService.cs" />
     <Compile Include="Intefaces\IUserService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\CategoryService.cs" />
+    <Compile Include="Services\ProductService.cs" />
+    <Compile Include="Services\ShopBasketService.cs" />
     <Compile Include="Services\UserService.cs" />
-    <Compile Include="ViewModels\CategoryVM\CategoryVM.cs" />
+    <Compile Include="ViewModels\CategoryVM\CategoryListItem.cs" />
+    <Compile Include="ViewModels\CategoryVM\CreateCategoryVM.cs" />
     <Compile Include="ViewModels\ProductVM\CreateProductVM.cs" />
+    <Compile Include="ViewModels\ProductVM\ProductListItemVM.cs" />
     <Compile Include="ViewModels\UserVM\AccountVM.cs" />
   </ItemGroup>
   <ItemGroup>

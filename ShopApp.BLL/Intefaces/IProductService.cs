@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ShopApp.BLL.ViewModels.ProductVM;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,8 +9,8 @@ namespace ShopApp.BLL.Intefaces
 {
     public interface IProductService
     {
-        void AddProduct();
-        void ViewProduct();
+        bool AddProduct(CreateProductVM createProductVM);
+        List<ProductListItemVM> GetAllProductsByCategory(Guid categoryId);
         void AddProductToOrder();
 
     }

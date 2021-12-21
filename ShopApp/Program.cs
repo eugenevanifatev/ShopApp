@@ -11,9 +11,9 @@ namespace ShopApp
     {
         static void Main(string[] args)
         {
-            AppDbContext appDbContext = new AppDbContext();
-            appDbContext.Users.Add(new Models.User() { Name = "admin", PasswordHash = "admin".GetHashCode().ToString(), IsAdmin = true });
-            appDbContext.SaveChanges();
+            //AppDbContext appDbContext = new AppDbContext();
+            //appDbContext.Users.Add(new Models.User() { Name = "admin", PasswordHash = "admin".GetHashCode().ToString(), IsAdmin = true });
+            //appDbContext.SaveChanges();
         }
     }
 }

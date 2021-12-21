@@ -8,7 +8,7 @@ namespace ShopApp.BLL.Intefaces
 {
     internal interface IOrderService
     {
-        void AddOrder();
+        void CreateOrder();
         void ModifyOrder();
         void ChangeStatusOfOrder();
 

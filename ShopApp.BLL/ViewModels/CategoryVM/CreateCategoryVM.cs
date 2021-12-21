@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace ShopApp.BLL.ViewModels.CategoryVM
 {
-    public class CategoryVM
+    public class CreateCategoryVM
     {
-        public string Name { get; set; }
+        public string CategoryName { get; set; }
     }
 }

@@ -16,38 +16,33 @@ namespace ShopApp.BLL.Services
         {
             DB = _db;
         }
-        public bool AddCategory(CategoryVM category)
+
+        public bool AddCategory(CreateCategoryVM category)
         {
             try
             {
-                if(DB.Categories.Any(m=>m.CategoryName == category.Name))
+                if(DB.Categories.Any(m=>m.CategoryName == category.CategoryName))
                 {
                     throw new Exception("Такая категория существует.");
                 }
-                DB.Categories.Add(new Models.Category { CategoryName = category.Name });
+                DB.Categories.Add(new Models.Category { CategoryName = category.CategoryName });
                 DB.SaveChanges();
                 return true;
             }
             catch (Exception ex)
             {
                 throw ex;
-            }
-            
+            }  
         }
 
-        public List<CategoryVM> ViewListOfCategory()
+        public List<CategoryListItem> GetListOfCategory()
         {
-            var listOfCategory = new List<CategoryVM>();
+            var listOfCategory = new List<CategoryListItem>();
             foreach (var category in DB.Categories)
             {
-                listOfCategory.Add(new CategoryVM() { Name = category.CategoryName});
+                listOfCategory.Add(new CategoryListItem(category));
             }
             return listOfCategory;
-        }
-
-        public void SelectCategory()
-        {
-            throw new NotImplementedException();
         }
 
        
