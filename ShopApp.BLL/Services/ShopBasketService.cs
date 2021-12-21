@@ -26,12 +26,23 @@ namespace ShopApp.BLL.Services
 
         public void RemoveProductFromBasket(Guid ProductId)
         {
-            throw new NotImplementedException();
+            var productDb = DB.Products.Find(ProductId);
+            ShopBasket.productInBasket.Remove(new ProductListItemVM(productDb));
         }
 
         public void SendBasketToOrder()
         {
             throw new NotImplementedException();
+        }
+
+        public decimal GetBasketPrice()
+        {
+            decimal price = 0;
+            foreach (var product in ShopBasket.productInBasket)
+            {
+                price += product.ProductPrice;
+            }
+            return price;
         }
     }
 }

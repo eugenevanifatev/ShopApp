@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ShopApp.BLL.ViewModels.OrderVM;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,8 +9,8 @@ namespace ShopApp.BLL.Intefaces
 {
     internal interface IOrderService
     {
-        void CreateOrder();
-        void ModifyOrder();
+        void CreateOrder(CreateOrderVM createOrder);
+        //void ModifyOrder();
         void ChangeStatusOfOrder();
 
     }

@@ -28,7 +28,10 @@ namespace ShopApp.BLL.Services
                 }
                 var newProduct = new Product()
                 {
-                    
+                    ProductName = prod.ProductName,
+                    ProductPrice = prod.ProductPrice,
+                    ProductDescription = prod.ProductDescription,
+                    CategoryId = prod.CategoryId
                 };
                 DB.Products.Add(newProduct);
                 DB.SaveChanges();

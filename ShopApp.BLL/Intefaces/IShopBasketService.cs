@@ -11,6 +11,6 @@ namespace ShopApp.BLL.Intefaces
         void AddProductToBasket(Guid ProductId);
         void RemoveProductFromBasket(Guid ProductId);
         void SendBasketToOrder();
-        
+        decimal GetBasketPrice();
     }
 }
