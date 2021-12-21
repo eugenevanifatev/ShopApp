@@ -6,7 +6,11 @@ using System.Threading.Tasks;
 
 namespace ShopApp.BLL.Intefaces
 {
-    public interface IAdminService
+    internal interface IOrderService
     {
+        void AddOrder();
+        void ModifyOrder();
+        void ChangeStatusOfOrder();
+
     }
 }

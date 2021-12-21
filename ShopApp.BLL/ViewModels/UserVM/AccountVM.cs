@@ -10,5 +10,6 @@ namespace ShopApp.BLL.ViewModels.UserVM
     {
         public string Name { get; set; }
         public string PasswrdHash { get; set; }
+        public bool IsAdmin { get; set; } = false;
     }
 }

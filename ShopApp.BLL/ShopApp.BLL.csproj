@@ -51,11 +51,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
-    <Compile Include="Intefaces\IAdminService.cs" />
+    <Compile Include="Infrastructure\CurrentAccount.cs" />
+    <Compile Include="Intefaces\ICategoryService.cs" />
+    <Compile Include="Intefaces\IOrderService.cs" />
+    <Compile Include="Intefaces\IProductService.cs" />
     <Compile Include="Intefaces\IUserService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\CategoryService.cs" />
     <Compile Include="Services\UserService.cs" />
+    <Compile Include="ViewModels\CategoryVM\CategoryVM.cs" />
+    <Compile Include="ViewModels\ProductVM\CreateProductVM.cs" />
     <Compile Include="ViewModels\UserVM\AccountVM.cs" />
   </ItemGroup>
   <ItemGroup>

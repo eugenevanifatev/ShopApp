@@ -4,16 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ShopApp.Models
+namespace ShopApp.BLL.ViewModels.ProductVM
 {
-    public class Product
+    public class CreateProductVM
     {
-        public Guid ProductId { get; set; } = Guid.NewGuid();
         public string ProductName { get; set; }
         public decimal ProductPrice { get; set; }
         public string ProductDescription { get; set; }
         public Guid CategoryId { get; set; }
-        public virtual Category Category { get; set; }
-        public ICollection<Order> Orders { get; set; } = new List<Order>();
     }
 }
