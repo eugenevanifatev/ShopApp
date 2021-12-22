@@ -30,6 +30,9 @@ namespace ShopApp.BLL.Services
                 CurrentAccount.Id = userDb.UserId;
                 CurrentAccount.Name = userDb.Name;
                 CurrentAccount.IsAdmin = userDb.IsAdmin;
+
+                accountVM.IsAdmin = userDb.IsAdmin;
+
                 return true;
             }
             catch (Exception ex)

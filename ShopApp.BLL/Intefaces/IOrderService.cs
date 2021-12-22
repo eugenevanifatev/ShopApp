@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ShopApp.BLL.Intefaces
 {
-    internal interface IOrderService
+    public interface IOrderService
     {
         void CreateOrder(CreateOrderVM createOrder);
         //void ModifyOrder();

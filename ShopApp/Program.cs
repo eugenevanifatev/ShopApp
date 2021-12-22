@@ -1,4 +1,5 @@
-﻿using ShopApp.DAL;
+﻿using ShopApp.Classes;
+using ShopApp.DAL;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,9 +12,14 @@ namespace ShopApp
     {
         static void Main(string[] args)
         {
-            //AppDbContext appDbContext = new AppDbContext();
-            //appDbContext.Users.Add(new Models.User() { Name = "admin", PasswordHash = "admin".GetHashCode().ToString(), IsAdmin = true });
-            //appDbContext.SaveChanges();
+            using (AppDbContext db = new AppDbContext())
+            {
+                //db.Users.Add(new Models.User() { Name = "admin1", PasswordHash = "admin1".GetHashCode().ToString(), IsAdmin = true });
+                //db.SaveChanges();
+                ConsoleHelper consoleHelper = new ConsoleHelper(db);
+                consoleHelper.GetStartPage();
+            }
+            
         }
     }
 }

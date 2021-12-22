@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace ShopApp.BLL.Services
 {
-    internal class ProductService : IProductService
+    public class ProductService : IProductService
     {
         private AppDbContext DB { get; set; }
         public ProductService(AppDbContext _db)
