@@ -76,7 +76,10 @@ namespace ShopApp.Classes
                 {
                     AdminMenu adminMenu = new AdminMenu(db);
                 }
-                UserMenu userMenu = new UserMenu(db);
+                else
+                {
+                    UserMenu userMenu = new UserMenu(db);
+                }
                 
             }
             catch (Exception ex)
