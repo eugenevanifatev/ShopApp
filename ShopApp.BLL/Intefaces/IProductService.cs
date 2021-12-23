@@ -12,6 +12,7 @@ namespace ShopApp.BLL.Intefaces
         bool AddProduct(CreateProductVM createProductVM);
         List<ProductListItemVM> GetAllProductsByCategory(Guid categoryId);
         void AddProductToOrder();
+        CreateProductVM ViewProduct(Guid productId);
 
     }
 }

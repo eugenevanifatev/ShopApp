@@ -9,9 +9,9 @@ namespace ShopApp.BLL.Intefaces
 {
     public interface ICategoryService
     {
-        bool AddCategory(CreateCategoryVM categoryVM);
+        bool AddCategory(string categoryName);
         List<CategoryListItemVM> GetListOfCategory();
-        //void SelectCategory();
+        void RemoveCategory();
 
     }
 }

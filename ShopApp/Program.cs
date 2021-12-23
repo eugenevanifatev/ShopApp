@@ -17,7 +17,7 @@ namespace ShopApp
                 //db.Users.Add(new Models.User() { Name = "admin", PasswordHash = "admin".GetHashCode().ToString(), IsAdmin = true });
                 //db.SaveChanges();
                 ConsoleHelper consoleHelper = new ConsoleHelper(db);
-                consoleHelper.GetStartPage();
+                consoleHelper.Start();
             }
             
         }

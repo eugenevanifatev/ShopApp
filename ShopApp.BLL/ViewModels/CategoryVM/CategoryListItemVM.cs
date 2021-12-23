@@ -16,5 +16,6 @@ namespace ShopApp.BLL.ViewModels.CategoryVM
         }
         public Guid CategoryId { get; set; }
         public string CategoryName { get; set; }
+        public int CategoryIdNumber { get; set; }
     }
 }

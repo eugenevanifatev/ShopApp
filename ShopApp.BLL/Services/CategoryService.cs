@@ -17,15 +17,15 @@ namespace ShopApp.BLL.Services
             DB = _db;
         }
 
-        public bool AddCategory(CreateCategoryVM category)
+        public bool AddCategory(string categoryName)
         {
             try
             {
-                if(DB.Categories.Any(m=>m.CategoryName == category.CategoryName))
+                if(DB.Categories.Any(m=>m.CategoryName == categoryName))
                 {
                     throw new Exception("Такая категория существует.");
                 }
-                DB.Categories.Add(new Models.Category { CategoryName = category.CategoryName });
+                DB.Categories.Add(new Models.Category { CategoryName = categoryName });
                 DB.SaveChanges();
                 return true;
             }
@@ -45,6 +45,9 @@ namespace ShopApp.BLL.Services
             return listOfCategory;
         }
 
-       
+        public void RemoveCategory()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

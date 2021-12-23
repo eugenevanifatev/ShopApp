@@ -18,5 +18,6 @@ namespace ShopApp.BLL.ViewModels.ProductVM
         public Guid ProductID { get; set; }
         public string ProductName { get; set; }
         public decimal ProductPrice { get; set; }
+        public int ProductIDNumber { get; set; }
     }
 }

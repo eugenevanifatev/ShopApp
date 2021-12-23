@@ -55,6 +55,7 @@
   <ItemGroup>
     <Compile Include="Classes\AdminMenu.cs" />
     <Compile Include="Classes\ConsoleHelper.cs" />
+    <Compile Include="Classes\StartMenu.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Classes\UserMenu.cs" />

@@ -50,7 +50,7 @@ namespace ShopApp.BLL.Services
 
         public List<ProductListItemVM> GetAllProductsByCategory(Guid categoryId)
         {
-            var products = DB.Products.Where(m=>m.CategoryId == categoryId);
+            var products = DB.Products.Where(m => m.CategoryId == categoryId);
             var productList = new List<ProductListItemVM>();
 
             foreach (var product in products)
@@ -58,6 +58,25 @@ namespace ShopApp.BLL.Services
                 productList.Add(new ProductListItemVM(product));
             }
             return productList;
+        }
+
+        public CreateProductVM ViewProduct(Guid productId)
+        {
+            try
+            {
+                var product = DB.Products.Find(productId);
+                CreateProductVM createProductVM = new CreateProductVM()
+                {
+                    ProductName = product.ProductName,
+                    ProductPrice = product.ProductPrice,
+                    ProductDescription = product.ProductDescription
+                };
+                return createProductVM;
+            }
+            catch(Exception ex)
+            {
+                throw ex;
+            }
         }
     }
 }

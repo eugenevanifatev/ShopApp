@@ -1,4 +1,6 @@
-﻿using ShopApp.BLL.ViewModels.UserVM;
+﻿using ShopApp.BLL.ViewModels.CategoryVM;
+using ShopApp.BLL.ViewModels.ProductVM;
+using ShopApp.BLL.ViewModels.UserVM;
 using ShopApp.DAL;
 using System;
 using System.Collections.Generic;
@@ -47,7 +49,7 @@ namespace ShopApp.Classes
         {
             Console.Clear();
             Console.WriteLine("Accounts");
-            Console.WriteLine("Actions: \n1 - List of users \n2 - List of admins \n 3 - Back to main menu");
+            Console.WriteLine("Actions: \n1 - List of users \n2 - List of admins \n3 - Back to main menu");
 
             var number = Console.ReadLine();
             switch (number)
@@ -106,7 +108,143 @@ namespace ShopApp.Classes
 
         private void GetCategoriesPage()
         {
-            throw new NotImplementedException();
+            try
+            {
+                Console.Clear();
+                Console.WriteLine("Categories:");
+                var listOfCategories = categoryService.GetListOfCategory();
+                int count = 0;
+                foreach (var category in listOfCategories)
+                {
+                    count++;
+                    Console.WriteLine($"{count}. {category.CategoryName}");
+                    category.CategoryIdNumber = count;
+                }
+                Console.WriteLine("\n\nActions: \n1 - Select \n2 - Add \n3 - Remove \n4 - Back to main menu");
+                var number = Console.ReadLine();
+                switch (number)
+                {
+                    case "1":
+                        Console.Write("Enter number: ");
+                        int numberOfCategory = Convert.ToInt32(Console.ReadLine());
+                        var selectedCategory = listOfCategories.Single(c => c.CategoryIdNumber == numberOfCategory);
+                        GetProdutsListPage(selectedCategory.CategoryId, selectedCategory.CategoryName);
+                        break;
+                    case "2":
+                        Console.Write("Enter name  of category: ");
+                        categoryService.AddCategory(Console.ReadLine());
+                        GetCategoriesPage();
+                        break;
+                    case "3":
+
+                        break;
+                    case "4":
+                        GetAdminMenuPage();
+                        break;
+                    default:
+                        Console.WriteLine("Incorrect input");
+                        Console.ReadKey();
+                        GetCategoriesPage();
+                        break;
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Error. " + ex.Message);
+                Console.ReadKey();
+                GetCategoriesPage();
+            }
+        }
+
+        private void GetProdutsListPage(Guid categoryId, string categoryName)
+        {
+            Console.Clear();
+            Console.WriteLine($"{categoryName}:");
+            var listOfProducts = productService.GetAllProductsByCategory(categoryId);
+            int count = 0;
+            foreach (var product in listOfProducts)
+            {
+                count++;
+                Console.WriteLine($"{count}. {product.ProductName}");
+                product.ProductIDNumber = count;
+            }
+            Console.WriteLine("\n\nActions: \n1 - Select \n2 - Add \n3 - Remove \n4 - Back to categories");
+            var number = Console.ReadLine();
+            switch (number)
+            {
+                case "1":
+                    Console.Write("Enter number: ");
+                    int numberOfProduct = Convert.ToInt32(Console.ReadLine());
+                    var selectedproduct = listOfProducts.Single(c => c.ProductIDNumber == numberOfProduct);
+                    GetProductPage(selectedproduct.ProductID);
+                    break;
+                case "2":
+                    GetProductCreatorPage(categoryId);
+                    break;
+                case "3":
+
+                    break;
+                case "4":
+                    GetCategoriesPage();
+                    break;
+                default:
+                    Console.WriteLine("Incorrect input");
+                    Console.ReadKey();
+                    GetProdutsListPage(categoryId, categoryName);
+                    break;
+            }
+        }
+
+        private void GetProductCreatorPage(Guid categoryId)
+        {
+            try
+            {
+                Console.Clear();
+                Console.WriteLine("New Product\n");
+                CreateProductVM createProductVM = new CreateProductVM();
+
+                Console.Write("Name: ");
+                createProductVM.ProductName = Console.ReadLine();
+
+                Console.Write("Price: ");
+                createProductVM.ProductPrice = Convert.ToDecimal(Console.ReadLine());
+
+                Console.WriteLine("Description:");
+                createProductVM.ProductDescription = Console.ReadLine();
+
+                createProductVM.CategoryId = categoryId;
+
+                productService.AddProduct(createProductVM);
+
+                GetProductCreatorPage(categoryId);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Error. " + ex.Message);
+                Console.ReadKey();
+                GetProductCreatorPage(categoryId);
+            }
+        }
+
+        private void GetProductPage(Guid productID)
+        {
+            try
+            {
+                Console.Clear();
+                var product = productService.ViewProduct(productID);
+                Console.WriteLine($"{product.ProductName}\n");
+                Console.WriteLine($"Price: {product.ProductPrice}$\n");
+                Console.WriteLine($"Description:\n{product.ProductDescription}");
+
+                Console.ReadKey();
+            }
+            catch(Exception ex)
+            {
+                Console.WriteLine("Error. " + ex.Message);
+                Console.ReadKey();
+                GetCategoriesPage();
+            }
+
         }
 
         private void GetNewAdminPage()
@@ -132,7 +270,6 @@ namespace ShopApp.Classes
             {
                 Console.WriteLine("Error. " + ex.Message);
                 Console.ReadKey();
-                Console.Clear();
                 GetAdminMenuPage();
             }
         }
