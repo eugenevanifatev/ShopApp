@@ -12,5 +12,7 @@ namespace ShopApp.BLL.Intefaces
         bool RegisterUser(AccountVM accountVM);
         bool LogIn(AccountVM accountVM);
         bool RegisterAdmin(AccountVM accountVM);
+        List<AccountListItemVM> GetListOFAccounts(bool isAdmin);
+        bool RemoveAccount(string userID);
     }
 }

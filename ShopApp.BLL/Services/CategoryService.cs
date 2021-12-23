@@ -35,12 +35,12 @@ namespace ShopApp.BLL.Services
             }  
         }
 
-        public List<CategoryListItem> GetListOfCategory()
+        public List<CategoryListItemVM> GetListOfCategory()
         {
-            var listOfCategory = new List<CategoryListItem>();
+            var listOfCategory = new List<CategoryListItemVM>();
             foreach (var category in DB.Categories)
             {
-                listOfCategory.Add(new CategoryListItem(category));
+                listOfCategory.Add(new CategoryListItemVM(category));
             }
             return listOfCategory;
         }

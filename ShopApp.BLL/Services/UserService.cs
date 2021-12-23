@@ -22,7 +22,7 @@ namespace ShopApp.BLL.Services
         {
             try
             {
-                var userDb = DB.Users.Single(m => m.Name == accountVM.Name && m.PasswordHash == accountVM.PasswrdHash);
+                var userDb = DB.Users.Single(m => m.Name == accountVM.Name && m.PasswordHash == accountVM.PasswordHash);
                 if (userDb == null)
                 {
                     throw new Exception("Неверный логин или пароль");
@@ -47,12 +47,12 @@ namespace ShopApp.BLL.Services
             {
                 if(DB.Users.Any(m=>m.Name==accountVM.Name))
                 {
-                    throw new Exception("Такой пользователь существует.");
+                    throw new Exception("Such a user exists.");
                 }
                 var newUser = new User()
                 {
                     Name = accountVM.Name,
-                    PasswordHash = accountVM.PasswrdHash
+                    PasswordHash = accountVM.PasswordHash
                 };
                 DB.Users.Add(newUser);
                 DB.SaveChanges();
@@ -70,12 +70,12 @@ namespace ShopApp.BLL.Services
             {
                 if (DB.Users.Any(m => m.Name == accountVM.Name))
                 {
-                    throw new Exception("Такой пользователь существует.");
+                    throw new Exception("Such a admin exists.");
                 }
                 var newUser = new User()
                 {
                     Name = accountVM.Name,
-                    PasswordHash = accountVM.PasswrdHash,
+                    PasswordHash = accountVM.PasswordHash,
                     IsAdmin = true
                 };
                 DB.Users.Add(newUser);
@@ -86,6 +86,35 @@ namespace ShopApp.BLL.Services
             {
                 throw ex;
             }
+        }
+
+        public List<AccountListItemVM> GetListOFAccounts(bool isAdmin)
+        {
+            var usersFromDB = DB.Users.Where(m=>m.IsAdmin == isAdmin);
+            var listOfUsers = new List<AccountListItemVM>();
+            foreach (var user in usersFromDB)
+            {
+                listOfUsers.Add(new AccountListItemVM(user));
+            }
+            return listOfUsers;
+        }
+
+        public bool RemoveAccount(string userID)
+        {
+            try
+            {
+                var account = DB.Users.Find(new Guid(userID));
+                if (account == null)
+                    throw new Exception("Incorrect UserID");
+                DB.Users.Remove(account);
+                DB.SaveChanges();
+                return true;
+            }
+            catch(Exception ex)
+            {
+                throw ex;
+            }
+
         }
     }
 }

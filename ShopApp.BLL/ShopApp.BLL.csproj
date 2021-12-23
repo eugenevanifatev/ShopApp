@@ -64,11 +64,12 @@
     <Compile Include="Services\ProductService.cs" />
     <Compile Include="Services\ShopBasketService.cs" />
     <Compile Include="Services\UserService.cs" />
-    <Compile Include="ViewModels\CategoryVM\CategoryListItem.cs" />
+    <Compile Include="ViewModels\CategoryVM\CategoryListItemVM.cs" />
     <Compile Include="ViewModels\CategoryVM\CreateCategoryVM.cs" />
     <Compile Include="ViewModels\OrderVM\CreateOrderVM.cs" />
     <Compile Include="ViewModels\ProductVM\CreateProductVM.cs" />
     <Compile Include="ViewModels\ProductVM\ProductListItemVM.cs" />
+    <Compile Include="ViewModels\UserVM\AccountListItemVM.cs" />
     <Compile Include="ViewModels\UserVM\AccountVM.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace ShopApp.BLL.ViewModels.CategoryVM
 {
-    public class CategoryListItem
+    public class CategoryListItemVM
     {
-        public CategoryListItem(Category category)
+        public CategoryListItemVM(Category category)
         {
             CategoryId = category.CategoryId;
             CategoryName = category.CategoryName;

@@ -34,6 +34,7 @@ namespace ShopApp.Classes
 
         public void GetStartPage()
         {
+            Console.Clear();
             Console.WriteLine("Shop");
             Console.WriteLine("Actions:");
             Console.WriteLine("1 - LogIn \n2 - Register \nEnter number: ");
@@ -49,7 +50,6 @@ namespace ShopApp.Classes
                 default:
                     Console.WriteLine("Incorrect input");
                     Console.ReadKey();
-                    Console.Clear();
                     GetStartPage();
                     break;
             }
@@ -68,7 +68,7 @@ namespace ShopApp.Classes
                 account.Name = Console.ReadLine();
 
                 Console.WriteLine("Enter Password:");
-                account.PasswrdHash = Console.ReadLine().GetHashCode().ToString();
+                account.PasswordHash = Console.ReadLine().GetHashCode().ToString();
 
                 var logInResult = userService.LogIn(account);
 
@@ -104,17 +104,16 @@ namespace ShopApp.Classes
                 account.Name = Console.ReadLine();
 
                 Console.WriteLine("Enter Password:");
-                account.PasswrdHash = Console.ReadLine().GetHashCode().ToString();
+                account.PasswordHash = Console.ReadLine().GetHashCode().ToString();
 
                 var registerResult = userService.RegisterUser(account);
 
-                GetLogInPage();
+                GetStartPage();
             }
             catch(Exception ex)
             {
                 Console.WriteLine("Error. " + ex.Message);
                 Console.ReadKey();
-                Console.Clear();
                 GetLogInPage();
             }
                     

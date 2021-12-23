@@ -9,7 +9,7 @@ namespace ShopApp.BLL.ViewModels.UserVM
     public class AccountVM
     {
         public string Name { get; set; }
-        public string PasswrdHash { get; set; }
+        public string PasswordHash { get; set; }
         public bool IsAdmin { get; set; }
     }
 }
