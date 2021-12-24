@@ -176,10 +176,10 @@ namespace ShopApp.Classes
                     Console.Write("Enter number: ");
                     int numberOfProduct = Convert.ToInt32(Console.ReadLine());
                     var selectedproduct = listOfProducts.Single(c => c.ProductIDNumber == numberOfProduct);
-                    GetProductPage(selectedproduct.ProductID);
+                    GetProductPage(selectedproduct.ProductID, categoryId, categoryName);
                     break;
                 case "2":
-                    GetProductCreatorPage(categoryId);
+                    GetProductCreatorPage(categoryId, categoryName);
                     break;
                 case "3":
 
@@ -195,7 +195,7 @@ namespace ShopApp.Classes
             }
         }
 
-        private void GetProductCreatorPage(Guid categoryId)
+        private void GetProductCreatorPage(Guid categoryId, string categoryName)
         {
             try
             {
@@ -216,35 +216,77 @@ namespace ShopApp.Classes
 
                 productService.AddProduct(createProductVM);
 
-                GetProductCreatorPage(categoryId);
+                GetProdutsListPage(categoryId, categoryName);
             }
             catch (Exception ex)
             {
                 Console.WriteLine("Error. " + ex.Message);
                 Console.ReadKey();
-                GetProductCreatorPage(categoryId);
+                GetProductCreatorPage(categoryId, categoryName);
             }
         }
 
-        private void GetProductPage(Guid productID)
+        private void GetProductPage(Guid productId, Guid categoryId, string categoryName)
         {
             try
             {
                 Console.Clear();
-                var product = productService.ViewProduct(productID);
+                var product = productService.ViewProduct(productId);
                 Console.WriteLine($"{product.ProductName}\n");
                 Console.WriteLine($"Price: {product.ProductPrice}$\n");
                 Console.WriteLine($"Description:\n{product.ProductDescription}");
 
-                Console.ReadKey();
+                Console.WriteLine("\n\nActions: \n1 - Edit \n2 - Back to product list");
+                var number = Console.ReadLine();
+                switch (number)
+                {
+                    case "1":
+                        GetProductEditorPage(productId, categoryId, categoryName);
+                        break;
+                    case "2":
+                        GetProdutsListPage(categoryId, categoryName);
+                        break;
+                    default:
+                        Console.WriteLine("Incorrect input");
+                        Console.ReadKey();
+                        GetProductPage(productId, categoryId, categoryName);
+                        break;
+                }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 Console.WriteLine("Error. " + ex.Message);
                 Console.ReadKey();
                 GetCategoriesPage();
             }
 
+        }
+
+        private void GetProductEditorPage(Guid productId, Guid categoryId, string categoryName)
+        {
+            try
+            {
+                CreateProductVM createProductVM = new CreateProductVM();
+
+                Console.Write("Name: ");
+                createProductVM.ProductName = Console.ReadLine();
+
+                Console.Write("Price: ");
+                createProductVM.ProductPrice = Convert.ToDecimal(Console.ReadLine());
+
+                Console.WriteLine("Description:");
+                createProductVM.ProductDescription = Console.ReadLine();
+
+                productService.EditProduct(productId, createProductVM);
+
+                GetProductPage(productId, categoryId, categoryName);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Error. " + ex.Message);
+                Console.ReadKey();
+                GetProductEditorPage(productId, categoryId, categoryName);
+            }
         }
 
         private void GetNewAdminPage()

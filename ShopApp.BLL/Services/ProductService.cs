@@ -78,5 +78,30 @@ namespace ShopApp.BLL.Services
                 throw ex;
             }
         }
+
+        public void EditProduct(Guid productId, CreateProductVM productVM)
+        {
+            try
+            {
+                var product = DB.Products.Find(productId);
+
+                var result = DB.Products.Find(productVM.ProductName);
+                if(result!=null && result.ProductId != productId)
+                {
+                    throw new Exception("A product with the same name already exists.");
+                }
+
+                product.ProductName = productVM.ProductName;
+                product.ProductPrice = productVM.ProductPrice;
+                product.ProductDescription = productVM.ProductDescription;
+
+                DB.SaveChanges();
+                
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
     }
 }
