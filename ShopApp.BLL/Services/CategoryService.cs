@@ -45,9 +45,51 @@ namespace ShopApp.BLL.Services
             return listOfCategory;
         }
 
-        public void RemoveCategory()
+        public void RemoveCategory(Guid categoryId)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var category = DB.Categories.Find(categoryId);
+                if (category != null)
+                {
+                    var listOfCategoryProducts = DB.Products.Where(p => p.CategoryId == categoryId).ToList();
+                    foreach (var product in listOfCategoryProducts)
+                    {
+                        DB.Products.Remove(product);
+                    }
+                    DB.Categories.Remove(category);
+                    DB.SaveChanges();
+                }
+                else
+                    throw new Exception("There is no such category.");
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public void EditCategory(Guid categoryId, string categoryName)
+        {
+            try
+            {
+                var category = DB.Categories.Find(categoryId);
+
+                var result = DB.Categories.FirstOrDefault(m => m.CategoryName == categoryName);
+                if (result != null && result.CategoryId != categoryId)
+                {
+                    throw new Exception("A category with the same name already exists.");
+                }
+
+                category.CategoryName = categoryName;
+
+                DB.SaveChanges();
+
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
     }
 }

@@ -22,9 +22,9 @@ namespace ShopApp.BLL.Services
         {
             try
             {
-                if (DB.Users.Any(m => m.Name == prod.ProductName))
+                if (DB.Products.Any(m => m.ProductName == prod.ProductName))
                 {
-                    throw new Exception("Такой продукт существует.");
+                    throw new Exception("Such a product exists.");
                 }
                 var newProduct = new Product()
                 {
@@ -85,7 +85,7 @@ namespace ShopApp.BLL.Services
             {
                 var product = DB.Products.Find(productId);
 
-                var result = DB.Products.Find(productVM.ProductName);
+                var result = DB.Products.FirstOrDefault(m => m.ProductName == productVM.ProductName);
                 if(result!=null && result.ProductId != productId)
                 {
                     throw new Exception("A product with the same name already exists.");
@@ -97,6 +97,25 @@ namespace ShopApp.BLL.Services
 
                 DB.SaveChanges();
                 
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public void RemoveProduct(Guid productId)
+        {
+            try
+            {
+                var product = DB.Products.Find(productId);
+                if (product != null)
+                {
+                    DB.Products.Remove(product);
+                    DB.SaveChanges();
+                }
+                else
+                    throw new Exception("There is no such product.");
             }
             catch (Exception ex)
             {

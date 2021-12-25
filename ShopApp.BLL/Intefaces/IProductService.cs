@@ -14,6 +14,7 @@ namespace ShopApp.BLL.Intefaces
         void AddProductToOrder();
         CreateProductVM ViewProduct(Guid productId);
         void EditProduct(Guid productId, CreateProductVM productVM);
+        void RemoveProduct(Guid productId);
 
     }
 }

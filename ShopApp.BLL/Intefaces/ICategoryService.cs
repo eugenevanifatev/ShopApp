@@ -11,7 +11,8 @@ namespace ShopApp.BLL.Intefaces
     {
         bool AddCategory(string categoryName);
         List<CategoryListItemVM> GetListOfCategory();
-        void RemoveCategory();
+        void RemoveCategory(Guid categoryId);
+        void EditCategory(Guid categoryId, string categoryName);
 
     }
 }

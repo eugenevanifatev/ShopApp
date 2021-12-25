@@ -120,7 +120,7 @@ namespace ShopApp.Classes
                     Console.WriteLine($"{count}. {category.CategoryName}");
                     category.CategoryIdNumber = count;
                 }
-                Console.WriteLine("\n\nActions: \n1 - Select \n2 - Add \n3 - Remove \n4 - Back to main menu");
+                Console.WriteLine("\n\nActions: \n1 - Select \n2 - Add \n3 - Edit \n4 - Remove \n5 - Back to main menu");
                 var number = Console.ReadLine();
                 switch (number)
                 {
@@ -136,9 +136,21 @@ namespace ShopApp.Classes
                         GetCategoriesPage();
                         break;
                     case "3":
-
+                        Console.Write("Enter number: ");
+                        numberOfCategory = Convert.ToInt32(Console.ReadLine());
+                        selectedCategory = listOfCategories.Single(c => c.CategoryIdNumber == numberOfCategory);
+                        Console.Write("Enter name  of category: ");
+                        categoryService.EditCategory(selectedCategory.CategoryId, Console.ReadLine());
+                        GetCategoriesPage();
                         break;
                     case "4":
+                        Console.Write("Enter number: ");
+                        numberOfCategory = Convert.ToInt32(Console.ReadLine());
+                        selectedCategory = listOfCategories.Single(c => c.CategoryIdNumber == numberOfCategory);
+                        categoryService.RemoveCategory(selectedCategory.CategoryId);
+                        GetCategoriesPage();
+                        break;
+                    case "5":
                         GetAdminMenuPage();
                         break;
                     default:
@@ -182,7 +194,11 @@ namespace ShopApp.Classes
                     GetProductCreatorPage(categoryId, categoryName);
                     break;
                 case "3":
-
+                    Console.Write("Enter number: ");
+                    numberOfProduct = Convert.ToInt32(Console.ReadLine());
+                    selectedproduct = listOfProducts.Single(c => c.ProductIDNumber == numberOfProduct);
+                    productService.RemoveProduct(selectedproduct.ProductID);
+                    GetProdutsListPage(categoryId, categoryName);
                     break;
                 case "4":
                     GetCategoriesPage();
