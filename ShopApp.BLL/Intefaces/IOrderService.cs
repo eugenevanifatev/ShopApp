@@ -9,7 +9,7 @@ namespace ShopApp.BLL.Intefaces
 {
     public interface IOrderService
     {
-        void CreateOrder(CreateOrderVM createOrder);
+        void CreateOrder(CreateOrderVM createOrder, decimal totalPrice);
         //void ModifyOrder();
         void ChangeStatusOfOrder();
 

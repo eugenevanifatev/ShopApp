@@ -1,4 +1,5 @@
-﻿using ShopApp.BLL.ViewModels.CategoryVM;
+﻿using ShopApp.BLL.Infrastructure;
+using ShopApp.BLL.ViewModels.CategoryVM;
 using ShopApp.BLL.ViewModels.ProductVM;
 using ShopApp.BLL.ViewModels.UserVM;
 using ShopApp.DAL;
@@ -22,7 +23,7 @@ namespace ShopApp.Classes
             Console.Clear();
             Console.WriteLine("Admin menu");
             Console.WriteLine("Actions:");
-            Console.WriteLine("1 - Create new Admin \n2 - Accounts \n3 - Categories \nEnter number: ");
+            Console.WriteLine("1 - Create new Admin \n2 - Accounts \n3 - Categories \n4 - Log Out \nEnter number: ");
 
             var number = Console.ReadLine();
             switch (number)
@@ -35,6 +36,12 @@ namespace ShopApp.Classes
                     break;
                 case "3":
                     GetCategoriesPage();
+                    break;
+                case "4":
+                    CurrentAccount.Id = Guid.Empty;
+                    CurrentAccount.Name = null;
+                    CurrentAccount.IsAdmin = false;
+                    Program.GetStartPage();
                     break;
                 default:
                     Console.WriteLine("Incorrect input");

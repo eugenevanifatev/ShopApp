@@ -10,6 +10,5 @@ namespace ShopApp.BLL.ViewModels.OrderVM
     {
         public string OrderAddress { get; set; }
         public string OrderPhone { get; set; }
-        //public decimal OrderPrice { get; set; }
     }
 }

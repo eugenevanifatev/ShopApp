@@ -12,6 +12,11 @@ namespace ShopApp
     {
         static void Main(string[] args)
         {
+            GetStartPage();
+        }
+
+        static public void GetStartPage()
+        {
             using (AppDbContext db = new AppDbContext())
             {
                 //db.Users.Add(new Models.User() { Name = "admin", PasswordHash = "admin".GetHashCode().ToString(), IsAdmin = true });
@@ -19,7 +24,6 @@ namespace ShopApp
                 ConsoleHelper consoleHelper = new ConsoleHelper(db);
                 consoleHelper.Start();
             }
-            
         }
     }
 }

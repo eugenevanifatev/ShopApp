@@ -19,24 +19,20 @@ namespace ShopApp.BLL.Services
             DB = _db;
         }
 
-        public void CreateOrder(CreateOrderVM createOrder)
+        public void CreateOrder(CreateOrderVM createOrder, decimal totalPrice)
         {
             try
             {
-                decimal price = 0;
-                foreach (var product in ShopBasket.productInBasket)
+                if (totalPrice == 0)
                 {
-                    price += product.ProductPrice;
-                }
-                if (price == 0)
-                {
-                    throw new Exception("В корзине нет товаров");
+                    throw new Exception("Shopping basket is empty");
                 }
                 var newOrder = new Order
                 {
                     OrderAddress = createOrder.OrderAddress,
                     OrderPhone = createOrder.OrderPhone,
-                    OrderPrice = price,
+                    OrderPrice = totalPrice,
+                    OrderStatus = 0,
                     UserId = CurrentAccount.Id
                 };
                 DB.Orders.Add(newOrder);
