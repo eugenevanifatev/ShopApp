@@ -32,9 +32,16 @@ namespace ShopApp.BLL.Services
                     OrderAddress = createOrder.OrderAddress,
                     OrderPhone = createOrder.OrderPhone,
                     OrderPrice = totalPrice,
-                    OrderStatus = 0,
+                    OrderStatus = "formalized",
                     UserId = CurrentAccount.Id
                 };
+
+                foreach (var product in ShopBasket.productInBasket)
+                {
+                    var productDB = DB.Products.Find(product.ProductID);
+                    newOrder.Products.Add(productDB);
+                }
+
                 DB.Orders.Add(newOrder);
                 DB.SaveChanges();
             }
@@ -48,6 +55,16 @@ namespace ShopApp.BLL.Services
         public void ChangeStatusOfOrder()
         {
             throw new NotImplementedException();
+        }
+
+        public List<OrderListItemVM> GetListOfOrders()
+        {
+            var listOfOrders = new List<OrderListItemVM>();
+            foreach (var order in DB.Orders)
+            {
+                listOfOrders.Add(new OrderListItemVM(order));
+            }
+            return listOfOrders;
         }
     }
 }

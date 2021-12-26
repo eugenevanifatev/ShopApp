@@ -12,6 +12,7 @@ namespace ShopApp.BLL.Intefaces
         void CreateOrder(CreateOrderVM createOrder, decimal totalPrice);
         //void ModifyOrder();
         void ChangeStatusOfOrder();
+        List<OrderListItemVM> GetListOfOrders();
 
     }
 }

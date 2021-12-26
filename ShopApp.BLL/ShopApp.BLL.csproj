@@ -67,6 +67,7 @@
     <Compile Include="ViewModels\CategoryVM\CategoryListItemVM.cs" />
     <Compile Include="ViewModels\CategoryVM\CreateCategoryVM.cs" />
     <Compile Include="ViewModels\OrderVM\CreateOrderVM.cs" />
+    <Compile Include="ViewModels\OrderVM\OrderListItemVM.cs" />
     <Compile Include="ViewModels\ProductVM\CreateProductVM.cs" />
     <Compile Include="ViewModels\ProductVM\ProductListItemVM.cs" />
     <Compile Include="ViewModels\UserVM\AccountListItemVM.cs" />

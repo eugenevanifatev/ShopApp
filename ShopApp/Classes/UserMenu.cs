@@ -36,12 +36,13 @@ namespace ShopApp.Classes
                     GetShopBasketPage();
                     break;
                 case "4":
-                    GetShopBasketPage();
+                    GetOrderHistoryPage();
                     break;
                 case "5":
                     CurrentAccount.Id = Guid.Empty;
                     CurrentAccount.Name = null;
                     CurrentAccount.IsAdmin = false;
+                    ShopBasket.productInBasket.Clear();
                     Program.GetStartPage();
                     break;
                 default:
@@ -49,6 +50,40 @@ namespace ShopApp.Classes
                     Console.ReadKey();
                     Console.Clear();
                     GetUserMenuPage();
+                    break;
+            }
+        }
+
+        private void GetOrderHistoryPage()
+        {
+            Console.Clear();
+            Console.WriteLine("History of orders\n");
+            var listOfOrders = orderService.GetListOfOrders();
+            int count = 0;
+            foreach (var order in listOfOrders)
+            {
+                count++;
+                Console.WriteLine($"{count}. {order.OrderDate.Day}.{order.OrderDate.Month}.{order.OrderDate.Year} {order.OrderDate.Hour}:{order.OrderDate.Minute} - Total Price: {order.OrderPrice}  Sttatus: {order.OrderStatus}");
+                foreach (var product in order.OrderProducts)
+                {
+                    Console.Write($" {product.ProductName} ");
+                }
+                Console.WriteLine("\n--------------------------------");
+                order.OrderIDNumber = count;
+            }
+            Console.WriteLine("\n\nActions: \n1 - Back to main menu");
+
+            var number = Console.ReadLine();
+            switch (number)
+            {
+                case "1":
+                    GetUserMenuPage();
+                    break;
+                default:
+                    Console.WriteLine("Incorrect input");
+                    Console.ReadKey();
+                    Console.Clear();
+                    GetOrderHistoryPage();
                     break;
             }
         }

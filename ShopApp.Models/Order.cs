@@ -13,7 +13,7 @@ namespace ShopApp.Models
         public string OrderAddress { get; set; }
         public string OrderPhone { get; set; }
         public decimal OrderPrice { get; set; }
-        public int OrderStatus { get; set; } = 1;
+        public string OrderStatus { get; set; }
         public Guid UserId { get; set; }
         public virtual User User { get; set; }
         public ICollection<Product> Products { get; set; } = new List<Product>();
