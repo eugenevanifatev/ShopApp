@@ -23,7 +23,7 @@ namespace ShopApp.Classes
             Console.Clear();
             Console.WriteLine("Admin menu");
             Console.WriteLine("Actions:");
-            Console.WriteLine("1 - Create new Admin \n2 - Accounts \n3 - Categories \n4 - Log Out \nEnter number: ");
+            Console.WriteLine("1 - Create new Admin \n2 - Accounts \n3 - Categories \n4 - Orders \n5 - Log Out \nEnter number: ");
 
             var number = Console.ReadLine();
             switch (number)
@@ -38,6 +38,9 @@ namespace ShopApp.Classes
                     GetCategoriesPage();
                     break;
                 case "4":
+                    GetOrdersPage();
+                    break;
+                case "5":
                     CurrentAccount.Id = Guid.Empty;
                     CurrentAccount.Name = null;
                     CurrentAccount.IsAdmin = false;
@@ -49,6 +52,48 @@ namespace ShopApp.Classes
                     Console.Clear();
                     GetAdminMenuPage();
                     break;
+            }
+        }
+
+        private void GetOrdersPage()
+        {
+            Console.Clear();
+            Console.WriteLine("Orders\n");
+            var listOfOrders = orderService.GetListOfOrders();
+            int count = 0;
+            foreach (var order in listOfOrders)
+            {
+                count++;
+                Console.WriteLine($"{count}. {order.OrderDate.Day}.{order.OrderDate.Month}.{order.OrderDate.Year} {order.OrderDate.Hour}:{order.OrderDate.Minute} - User: {order.UserName} | Total Price: {order.OrderPrice} | Status: {order.OrderStatus}");
+                foreach (var product in order.OrderProducts)
+                {
+                    Console.Write($" {product.ProductName} ");
+                }
+                Console.WriteLine("\n--------------------------------");
+                order.OrderIDNumber = count;
+
+                Console.WriteLine("\n\nActions: \n1 - Edit status \n2 - Back to main menu");
+
+                var number = Console.ReadLine();
+                switch (number)
+                {
+                    case "1":
+                        Console.Write("Enter number: ");
+                        var numberOfOrder = Convert.ToInt32(Console.ReadLine());
+                        var selectedOrder = listOfOrders.Single(c => c.OrderIDNumber == numberOfOrder);
+                        Console.Write("Enter name  of category (formalized, confirmed, delivered, canceled): ");
+                        orderService.ChangeStatusOfOrder(selectedOrder.OrderId, Console.ReadLine());
+                        GetOrdersPage();
+                        break;
+                    case "2":
+                        GetAdminMenuPage();
+                        break;
+                    default:
+                        Console.WriteLine("Incorrect input");
+                        Console.ReadKey();
+                        GetOrdersPage();
+                        break;
+                }
             }
         }
 
@@ -81,35 +126,44 @@ namespace ShopApp.Classes
 
         private void GetListOfAccountsPage(bool isAdmin)
         {
-            Console.Clear();
-            if(isAdmin == true)
-                Console.WriteLine("List of admins:");
-            else
-                Console.WriteLine("List of users:");
-
-            var listOfAccounts = userService.GetListOFAccounts(isAdmin);
-            foreach (var account in listOfAccounts)
+            try
             {
-                Console.WriteLine($"{account.UserID} -- {account.Name}");
+                Console.Clear();
+                if (isAdmin == true)
+                    Console.WriteLine("List of admins:");
+                else
+                    Console.WriteLine("List of users:");
+
+                var listOfAccounts = userService.GetListOFAccounts(isAdmin);
+                foreach (var account in listOfAccounts)
+                {
+                    Console.WriteLine($"{account.UserID} -- {account.Name}");
+                }
+
+                Console.WriteLine("\n\nActions: \n1 - Remove Account \n2 - Back to main menu");
+                var number = Console.ReadLine();
+                switch (number)
+                {
+                    case "1":
+                        Console.Write("Enter UserID: ");
+                        userService.RemoveAccount(Console.ReadLine());
+                        GetListOfAccountsPage(isAdmin);
+                        break;
+                    case "2":
+                        GetAdminMenuPage();
+                        break;
+                    default:
+                        Console.WriteLine("Incorrect input");
+                        Console.ReadKey();
+                        GetListOfAccountsPage(isAdmin);
+                        break;
+                }
             }
-
-            Console.WriteLine("\n\nActions: \n1 - Remove Account \n2 - Back to main menu");
-            var number = Console.ReadLine();
-            switch (number)
+            catch (Exception ex)
             {
-                case "1":
-                    Console.Write("Enter UserID: ");
-                    userService.RemoveAccount(Console.ReadLine());
-                    GetListOfAccountsPage(isAdmin);
-                    break;
-                case "2":
-                    GetAdminMenuPage();
-                    break;
-                default:
-                    Console.WriteLine("Incorrect input");
-                    Console.ReadKey();
-                    GetListOfAccountsPage(isAdmin);
-                    break;
+                Console.WriteLine("Error. " + ex.Message);
+                Console.ReadKey();
+                GetListOfAccountsPage(isAdmin);
             }
         }
 

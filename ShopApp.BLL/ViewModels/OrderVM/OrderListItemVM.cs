@@ -22,7 +22,11 @@ namespace ShopApp.BLL.ViewModels.OrderVM
         public DateTime OrderDate { get; set; }
         public decimal OrderPrice { get; set; }
         public string OrderStatus { get; set; }
+        public Guid UserId { get; set; }
+        public string UserName { get; set; }
         public List<Product> OrderProducts { get; set; }
         public int OrderIDNumber { get; set; }
-    }
+
+        
+    } 
 }

@@ -106,6 +106,8 @@ namespace ShopApp.BLL.Services
                 var account = DB.Users.Find(new Guid(userID));
                 if (account == null)
                     throw new Exception("Incorrect UserID");
+                if (account.UserId == CurrentAccount.Id)
+                    throw new Exception("You cannot delete the current account");
                 DB.Users.Remove(account);
                 DB.SaveChanges();
                 return true;

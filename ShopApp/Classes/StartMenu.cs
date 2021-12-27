@@ -20,7 +20,7 @@ namespace ShopApp.Classes
             Console.Clear();
             Console.WriteLine("Shop");
             Console.WriteLine("Actions:");
-            Console.WriteLine("1 - LogIn \n2 - Register \nEnter number: ");
+            Console.Write("1 - LogIn \n2 - Register \n3 - Close program \nEnter number: ");
             var number = Console.ReadLine();
             switch (number)
             {
@@ -29,6 +29,8 @@ namespace ShopApp.Classes
                     break;
                 case "2":
                     GetRegisterPage();
+                    break;
+                case"3":
                     break;
                 default:
                     Console.WriteLine("Incorrect input");
@@ -70,7 +72,7 @@ namespace ShopApp.Classes
                 Console.WriteLine("Error. " + ex.Message);
                 Console.ReadKey();
                 Console.Clear();
-                GetLogInPage();
+                GetStartPage();
             }
         }
 
@@ -97,7 +99,7 @@ namespace ShopApp.Classes
             {
                 Console.WriteLine("Error. " + ex.Message);
                 Console.ReadKey();
-                GetLogInPage();
+                GetStartPage();
             }
 
         }

@@ -11,8 +11,9 @@ namespace ShopApp.BLL.Intefaces
     {
         void CreateOrder(CreateOrderVM createOrder, decimal totalPrice);
         //void ModifyOrder();
-        void ChangeStatusOfOrder();
+        void ChangeStatusOfOrder(Guid OrderId, string newStatus);
         List<OrderListItemVM> GetListOfOrders();
+        List<OrderListItemVM> GetListOfOrdersByUser(Guid userId);
 
     }
 }

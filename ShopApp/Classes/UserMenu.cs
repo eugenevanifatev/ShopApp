@@ -58,7 +58,7 @@ namespace ShopApp.Classes
         {
             Console.Clear();
             Console.WriteLine("History of orders\n");
-            var listOfOrders = orderService.GetListOfOrders();
+            var listOfOrders = orderService.GetListOfOrdersByUser(CurrentAccount.Id);
             int count = 0;
             foreach (var order in listOfOrders)
             {
